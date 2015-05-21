@@ -1,5 +1,5 @@
 /.gradle/
 /reports/
 /generated/
-/bin/
-*/run/rt/
+**/bin/
+**/run/rt/
