@@ -4,15 +4,6 @@ AspectJ runtime weaving examples with explicit and wildcard pointcuts
 * Eclipse PDE 
 * bndtools projects
 
-## TOC
-
-* [development environment setup](# development environment setup)
-* [pde.target](#project pde.target)
-* [example.aspectj.pde.app](#project example.aspectj.pde.app)
-* [example.aspectj.pde.explicit](#project example.aspectj.pde.explicit)
-* [example.aspectj.pde.wildcard](#project example.aspectj.pde.wildcard)
-
-
 ## development environment setup
 
 IDE used for this projects, consists of the following parts
