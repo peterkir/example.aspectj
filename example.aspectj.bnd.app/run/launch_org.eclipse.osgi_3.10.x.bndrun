@@ -10,8 +10,6 @@
    org.eclipse.equinox.util,\
    org.eclipse.equinox.common,\
    org.eclipse.core.runtime,\
-   org.eclipse.core.runtime.compatibility.auth,\
-   org.eclipse.core.runtime.compatibility.registry,\
    org.eclipse.core.jobs,\
    org.eclipse.core.contenttype,\
    org.eclipse.update.configurator,\
