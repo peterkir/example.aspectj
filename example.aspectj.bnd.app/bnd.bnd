@@ -1,0 +1,14 @@
+-include: ${project}/.settings/org.eclipse.jdt.core.prefs
+javac.source: ${org.eclipse.jdt.core.compiler.source}
+javac.target: ${org.eclipse.jdt.core.compiler.source}
+java.encoding: UTF-8
+
+Bundle-SymbolicName: ${project.name};singleton:=true
+Bundle-Version:0.1.0.${tstamp}
+
+Private-Package: \
+    example.aspectj.app
+    
+-includeresource: plugin.xml=resources/_plugin.xml
+
+-buildpath: org.eclipse.equinox.app

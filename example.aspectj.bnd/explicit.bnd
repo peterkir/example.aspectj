@@ -1,0 +1,16 @@
+Bundle-Version:0.1.0.${tstamp}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+
+Require-Bundle: \
+    org.eclipse.core.runtime,\
+    org.aspectj.runtime,\
+    example.aspectj.bnd.app
+
+Eclipse-SupplementBundle: example.aspectj.bnd.app
+
+X-COMMENT: select only one of the following Export-Package statements by removing the trailing index number 
+Export-Package0: example.aspectj.explicit;aspects="AfterAspectJ,AfterReturningAspectJ,AroundAspectJ,BeforeAspectJ";x-internal:=true
+Export-Package1: example.aspectj.explicit;aspects="AfterAspectJ";x-internal:=true
+Export-Package2: example.aspectj.explicit;aspects="AfterReturningAspectJ";x-internal:=true
+Export-Package: example.aspectj.explicit;aspects="AroundAspectJ";x-internal:=true
+Export-Package4: example.aspectj.explicit;aspects="BeforeAspectJ";x-internal:=true

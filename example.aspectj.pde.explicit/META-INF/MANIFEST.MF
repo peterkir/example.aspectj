@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Aspectj
+Bundle-SymbolicName: example.aspectj.explicit;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.aspectj.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Eclipse-SupplementBundle: example.aspectj.pde.app
+X-COMMENT: select only one of the following Export-Package statements by removing the trailing index number  
+Export-Package1: example.aspectj.explicit;aspects="AfterAspectJ";x-internal:=true
+Export-Package2: example.aspectj.explicit;aspects="AfterReturningAspectJ";x-internal:=true
+Export-Package3: example.aspectj.explicit;aspects="BeforeAspectJ";x-internal:=true
+Export-Package: example.aspectj.explicit;aspects="AroundAspectJ";x-internal:=true
+

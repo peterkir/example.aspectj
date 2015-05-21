@@ -1,0 +1,37 @@
+-runfw: org.eclipse.osgi;version='[3.8.2.v20130124-134944,3.8.2.v20130124-134944]'
+-runee: JavaSE-1.7
+-runbundles: \
+   bndtools.runtime.eclipse.applaunch,\
+   \
+   org.eclipse.equinox.weaving.aspectj;version='[1.0.300,1.0.400)',\
+   org.aspectj.weaver;version='[1.8.5,1.8.6)',\
+   org.aspectj.runtime;version='[1.8.5,1.8.6)',\
+   \
+   org.eclipse.equinox.common,\
+   org.eclipse.equinox.ds,\
+   org.eclipse.core.runtime,\
+   \
+   org.eclipse.core.contenttype,\
+   org.eclipse.core.jobs,\
+   org.eclipse.equinox.app,\
+   org.eclipse.equinox.preferences,\
+   org.eclipse.equinox.registry,\
+   org.eclipse.equinox.util,\
+   org.eclipse.osgi.services;version='[3.3,3.4)',\
+   org.eclipse.update.configurator,\
+   \
+   example.aspectj.bnd.app;version=latest,\
+   example.aspectj.bnd.wildcard;version=latest
+
+-runpath: org.eclipse.equinox.weaving.hook;version='[1.0.200,1.0.300)'
+-runvm:-Dosgi.framework.extensions=org.eclipse.equinox.weaving.hook
+
+-runproperties: \
+    launch.keep=false,\
+    launch.storage.dir=rt/wildcard_cfg,\
+    \
+    eclipse.application=example.aspectj.bnd.app.application,\
+    \
+    aj.weaving.verbose=true,\
+    org.aspectj.weaver.showWeaveInfo=true,\
+    org.aspectj.osgi.verbose=true
