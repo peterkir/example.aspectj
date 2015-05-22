@@ -1,5 +1,7 @@
 ﻿# example.aspectj
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/peterkir/example.aspectj?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 AspectJ runtime weaving examples with explicit and wildcard pointcuts
 * Eclipse PDE 
 * bndtools projects
