@@ -5,12 +5,13 @@ Bundle-SymbolicName: example.aspectj.wildcard;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.aspectj.runtime
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Eclipse-SupplementBundle: example.aspectj.pde.app
 X-COMMENT: select only one of the following Export-Package statements by removing the trailing index number  
 Export-Package1: example.aspectj.wildcard;aspects="AfterAspectJ";x-internal:=true
 Export-Package2: example.aspectj.wildcard;aspects="AfterReturningAspectJ";x-internal:=true
 Export-Package3: example.aspectj.wildcard;aspects="BeforeAspectJ";x-internal:=true
 Export-Package: example.aspectj.wildcard;aspects="AroundAspectJ";x-internal:=true
+Automatic-Module-Name: example.aspectj.wildcard
 
 

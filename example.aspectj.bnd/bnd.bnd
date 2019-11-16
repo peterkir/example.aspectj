@@ -8,4 +8,5 @@ java.encoding: UTF-8
 
 -buildpath: \
 	org.aspectj.runtime,\
-	org.eclipse.equinox.app
+	org.eclipse.equinox.app,\
+	example.aspectj.bnd.app;version=latest

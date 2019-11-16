@@ -1,0 +1,40 @@
+-runfw: org.eclipse.osgi;version='[3.15,4)'
+-runee: JavaSE-1.8
+
+-runpath: org.eclipse.equinox.weaving.hook;version='[1.2.200,2)'
+-runvm:-Dosgi.framework.extensions=org.eclipse.equinox.weaving.hook
+-runprovidedcapabilities: ${native_capability}
+-resolve.effective: active;skip:="osgi.service"
+
+-runproperties: \
+    launch.keep=false,\
+    launch.storage.dir=rt/wildcard_cfg,\
+    \
+    eclipse.application=example.aspectj.bnd.app.application,\
+    \
+    aj.weaving.verbose=true,\
+    org.aspectj.weaver.showWeaveInfo=true,\
+    org.aspectj.osgi.verbose=true
+
+-runrequires: \
+    osgi.identity;filter:='(osgi.identity=bndtools.runtime.eclipse.applaunch)',\
+    osgi.identity;filter:='(osgi.identity=org.aspectj.runtime)',\
+    osgi.identity;filter:='(osgi.identity=org.eclipse.equinox.weaving.aspectj)',\
+    \
+    osgi.identity;filter:='(osgi.identity=example.aspectj.bnd.app)',\
+    osgi.identity;filter:='(osgi.identity=example.aspectj.bnd.wildcard)'
+
+-runbundles: \
+	bndtools.runtime.eclipse.applaunch;version='[0.1.0,0.1.1)',\
+	example.aspectj.bnd.app;version='[0.1.0,0.1.1)',\
+	example.aspectj.bnd.wildcard;version='[0.1.0,0.1.1)',\
+	org.aspectj.runtime;version='[1.9.2,1.9.3)',\
+	org.aspectj.weaver;version='[1.9.2,1.9.3)',\
+	org.eclipse.core.contenttype;version='[3.7.400,3.7.401)',\
+	org.eclipse.core.jobs;version='[3.10.500,3.10.501)',\
+	org.eclipse.core.runtime;version='[3.16.0,3.16.1)',\
+	org.eclipse.equinox.app;version='[1.4.300,1.4.301)',\
+	org.eclipse.equinox.common;version='[3.10.500,3.10.501)',\
+	org.eclipse.equinox.preferences;version='[3.7.500,3.7.501)',\
+	org.eclipse.equinox.registry;version='[3.8.500,3.8.501)',\
+	org.eclipse.equinox.weaving.aspectj;version='[1.0.400,1.0.401)'

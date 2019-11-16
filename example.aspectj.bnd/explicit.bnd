@@ -1,9 +1,9 @@
 Bundle-Version:0.1.0.${tstamp}
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 
 Require-Bundle: \
     org.eclipse.core.runtime,\
-    org.aspectj.runtime,\
+    org.aspectj.runtime;bundle-version="1.8.0",\
     example.aspectj.bnd.app
 
 Eclipse-SupplementBundle: example.aspectj.bnd.app

@@ -1,59 +1,79 @@
-########################
-## BND BUILD SETTINGS ##
-########################
+# Configure Repositories
+-plugin.01.R7.API: \
+	aQute.bnd.repository.maven.pom.provider.BndPomRepository; \
+		snapshotUrls=https://oss.sonatype.org/content/repositories/osgi/; \
+		releaseUrls=https://repo.maven.apache.org/maven2/; \
+		revision=org.osgi.enroute:osgi-api:7.0.0; \
+		readOnly=true; \
+		name="OSGi R7 API"
+-plugin.02.Enterprise.API: \
+	aQute.bnd.repository.maven.pom.provider.BndPomRepository; \
+		snapshotUrls=https://oss.sonatype.org/content/repositories/osgi/; \
+		releaseUrls=https://repo.maven.apache.org/maven2/; \
+		revision=org.osgi.enroute:enterprise-api:7.0.0; \
+		readOnly=true; \
+		name="Enterprise Java APIs"
+-plugin.03.R7.Impl: \
+	aQute.bnd.repository.maven.pom.provider.BndPomRepository; \
+		snapshotUrls=https://oss.sonatype.org/content/repositories/osgi/; \
+		releaseUrls=https://repo.maven.apache.org/maven2/; \
+		revision=org.osgi.enroute:impl-index:7.0.0; \
+		readOnly=true; \
+		name="OSGi R7 Reference Implementations"
+-plugin.04.Test: \
+	aQute.bnd.repository.maven.pom.provider.BndPomRepository; \
+		snapshotUrls=https://oss.sonatype.org/content/repositories/osgi/; \
+		releaseUrls=https://repo.maven.apache.org/maven2/; \
+		revision=org.osgi.enroute:test-bundles:7.0.0; \
+		readOnly=true; \
+		name="Testing Bundles"
+-plugin.05.Debug: \
+	aQute.bnd.repository.maven.pom.provider.BndPomRepository; \
+		snapshotUrls=https://oss.sonatype.org/content/repositories/osgi/; \
+		releaseUrls=https://repo.maven.apache.org/maven2/; \
+		revision=org.osgi.enroute:debug-bundles:7.0.0; \
+		readOnly=true; \
+		name="Debug Bundles"
+-plugin.06.Central: \
+	aQute.bnd.repository.maven.provider.MavenBndRepository; \
+		releaseUrl=https://repo.maven.apache.org/maven2/; \
+		index=${.}/central.maven; \
+		readOnly=true; \
+		name="Maven Central"
+-plugin.07.Local: \
+	aQute.bnd.deployer.repository.LocalIndexedRepo; \
+		name = Local; \
+		pretty = true; \
+		local = ${build}/local
+-plugin.08.Templates: \
+	aQute.bnd.deployer.repository.LocalIndexedRepo; \
+		name = Templates; \
+		pretty = true; \
+		local = ${build}/templates
+-plugin.09.Release: \
+	aQute.bnd.deployer.repository.LocalIndexedRepo; \
+		name = Release; \
+		pretty = true; \
+		local = ${build}/release
+-plugin.10.eclipse.common: \
+    aQute.bnd.deployer.repository.LocalIndexedRepo; \
+        name="Eclipse Bundles"; \
+        pretty=true; \
+        local=${workspace}/cnf/eclipse
 
+-releaserepo: Release
+-baselinerepo: Release
 
-## Global defaults are loaded from the bnd library (as shown below), place your
-## specific settings here. Additional settings are inherited from ext/*.bnd and
-## they will be overridden by anything you specify in this file.
+# Always use contracts
+-contract: *
 
-## General Options
-#project.dependson:     ${p-dependson;:}
-#project.bootclasspath: ${p-bootclasspath;:}
-#project.buildpath:     ${p-buildpath;:}
-#project.sourcepath:    ${p-sourcepath;:}
-#project.allsourcepath: ${p-allsourcepath;:}
-#project.output:        ${p-output}
-#project.testpath:      ${p-testpath;:}
+# Set Git revision information in the manifests of built bundles
+Git-Descriptor:           ${system-allow-fail;git describe --dirty --always}
+Git-SHA:                  ${system-allow-fail;git rev-list -1 HEAD}
 
-#-verbose:              false
-#project:               ${basedir}
-#src:                   src
-#bin:                   bin
-#testsrc:               test
-#testbin:               bin_test
-#test-reports:          test-reports
-#target-dir:            generated
-#target:                ${project}/${target-dir}
-#build:                 ${workspace}/cnf
-#p:                     ${basename;${project}}
-#project.name:          ${p}
-#plugin-dir:            ${build}/plugins
-
-## Java Compiler Options
-#java:                  java
-#javac:                 javac
-#javac.source:          1.5
-#javac.target:          1.5
-#javac.profile:
-#javac.debug:           on
-
-## Bnd Options
-#-sources:              true
-#-sourcepath:           ${project}/src
-
-
-## Properties from ext/*.bnd can be referenced in order to extend them. For
-## example, to add one additional plugin to the list defined in
-## ext/repositories.bnd:
-# -plugin: ${ext.repositories.-plugin}, org.example.MyPlugin
-
-
-## To enable baselining, uncomment the following lines:
-# -baseline: *
-
-
-## If you use git, you might want to uncomment the following lines:
-# Git-Descriptor:       ${system-allow-fail;git describe --dirty --always}
-# Git-SHA:              ${system-allow-fail;git rev-list -1 HEAD}
-# -diffignore:          Git-Descriptor,Git-SHA
+# JUnit
+junit: org.apache.servicemix.bundles.junit; version=4.12
+mockito: org.mockito.mockito-core; version=2.13.0
+mockito-deps: org.objenesis; version=2.6.0,\
+  net.bytebuddy.byte-buddy; version=1.7.9,\
+  net.bytebuddy.byte-buddy-agent; version=1.7.9 
