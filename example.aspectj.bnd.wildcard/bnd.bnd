@@ -1,3 +1,14 @@
+-include: ${project}/.settings/org.eclipse.jdt.core.prefs
+javac.source: ${org.eclipse.jdt.core.compiler.source}
+javac.target: ${org.eclipse.jdt.core.compiler.source}
+java.encoding: UTF-8
+
+-buildpath: \
+	org.aspectj.runtime,\
+    org.eclipse.core.runtime,\
+    org.eclipse.equinox.app,\
+	example.aspectj.bnd.app;version=latest
+
 Bundle-Version:0.1.0.${tstamp}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="eclipse_3.8.x" sequenceNumber="6">
-<locations>
-<location path="${project_loc:/cnf}/eclipse_common_3.8" type="Directory"/>
-<location path="${project_loc:/cnf}/eclipse_3.8_4.2_org.eclipse.osgi_3.8" type="Directory"/>
-</locations>
-</target>

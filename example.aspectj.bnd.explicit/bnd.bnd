@@ -1,0 +1,27 @@
+-include: ${project}/.settings/org.eclipse.jdt.core.prefs
+javac.source: ${org.eclipse.jdt.core.compiler.source}
+javac.target: ${org.eclipse.jdt.core.compiler.source}
+java.encoding: UTF-8
+
+-buildpath: \
+	org.aspectj.runtime,\
+	org.eclipse.core.runtime,\
+	org.eclipse.equinox.app,\
+	example.aspectj.bnd.app;version=latest
+
+Bundle-Version:0.1.0.${tstamp}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+
+Require-Bundle: \
+    org.eclipse.core.runtime,\
+    org.aspectj.runtime;bundle-version="1.8.0",\
+    example.aspectj.bnd.app
+
+Eclipse-SupplementBundle: example.aspectj.bnd.app
+
+X-COMMENT: select only one of the following Export-Package statements by removing the trailing index number 
+Export-Package0: example.aspectj.explicit;aspects="AfterAspectJ,AfterReturningAspectJ,AroundAspectJ,BeforeAspectJ";x-internal:=true
+Export-Package1: example.aspectj.explicit;aspects="AfterAspectJ";x-internal:=true
+Export-Package2: example.aspectj.explicit;aspects="AfterReturningAspectJ";x-internal:=true
+Export-Package: example.aspectj.explicit;aspects="AroundAspectJ";x-internal:=true
+Export-Package4: example.aspectj.explicit;aspects="BeforeAspectJ";x-internal:=true
