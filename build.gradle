@@ -63,7 +63,7 @@ subprojects { p ->
           destDir:   destinationDir, 
           fork:      "false",
           classpath: configurations.compile.asPath) 
-		{
+        {
             sourceroots {
               sourceSets.main.java.srcDirs.each{
                 pathelement(location:it.absolutePath)
@@ -72,7 +72,7 @@ subprojects { p ->
             include( name:'**/*.aj' )
             exclude( name:'**/*.java' )
         }
-	  }
+      }
     }
   }
 }
