@@ -3,17 +3,7 @@ tasks.named('wrapper') {
   jarFile = rootProject.file('.gradle-wrapper/gradle-wrapper.jar')
 }
 
-// use for build script dependencies and repository
-buildscript {
-  dependencies {
-    classpath fileTree(dir:"$ECLIPSE_BIN_DIR/plugins", include: 'org.eclipse.pde.core_*.jar')
-    classpath fileTree(dir:"$ECLIPSE_BIN_DIR/plugins", include: 'org.eclipse.equinox.common_*.jar')
-    classpath fileTree(dir:"$ECLIPSE_BIN_DIR/plugins", include: 'org.eclipse.osgi_*.jar')
-  }
-}
-
 subprojects { p ->
-
   def parsedProjectXml = new XmlSlurper().parse(file('.project'))
   def isBndProject = parsedProjectXml.buildSpec.buildCommand.find { cmd ->
       cmd.name.text() == 'bndtools.core.bndbuilder'
@@ -24,53 +14,62 @@ subprojects { p ->
 
   if (isBndProject) {
     println("bnd " + p)
+
+    repositories   { mavenCentral() }
+    configurations { ecj }
+    dependencies   { ecj 'org.eclipse.jdt.core.compiler:ecj:4.6.1'}
+
     compileJava {
       Properties jdtSettings = new Properties()
       jdtSettings.load(p.file(".settings/org.eclipse.jdt.core.prefs").newDataInputStream())
-      def srcLevel = jdtSettings.getProperty('org.eclipse.jdt.core.compiler.source')
+      def srcLevel    = jdtSettings.getProperty('org.eclipse.jdt.core.compiler.source')
       def targetLevel = jdtSettings.getProperty('org.eclipse.jdt.core.compiler.codegen.targetPlatform')
 
-      options.encoding = 'utf-8' // utf-8 is default encoding
-
-      def ecjJar = fileTree(dir: "$ECLIPSE_BIN_DIR/plugins", include: 'org.eclipse.jdt.core_*.jar').first()
-      if(ecjJar == null){
-          throw new GradleException("Eclipse compiler org.eclipse.jdt.core_*.jar not fond at $ECLIPSE_BIN_DIR/plugins")
-      }
       doFirst {
-          println ("doFirst")
-          options.forkOptions.with {
-              executable = 'java'
-              jvmArgs = ['-cp', ecjJar.getAbsolutePath(), 'org.eclipse.jdt.internal.compiler.batch.Main']
-          }
-      }
-      if (isAspectjProject) {
-        println("AspectJ " + p)
-        sourceSets { // this is necessary to exclude aj source files from the jar
-          main {
-            resources { 
-              exclude '**/*.aj' 
-            }
-          }
+        options.encoding = 'utf-8'
+        options.forkOptions.with {
+          executable = 'java'
+          jvmArgs = [
+			'-cp', 
+			project.configurations.ecj.asPath, 
+			'org.eclipse.jdt.internal.compiler.batch.Main'
+		  ]
         }
-        ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties")  {
-          classpath {
-            fileset(dir: "$ECLIPSE_BIN_DIR/plugins", includes: '*.jar')
-          }
+        if (sourceSets.inject(0) { result, i -> return (result + i.allSource.findAll{true}.size()) } == 0) {
+          println ("${project.name} creating empty bin folder in order satisfy jar task")
+          mkdir (file('bin'))
         }
-        ant.iajc(
-          source:    project.sourceCompatibility, 
-          target:    project.targetCompatibility, 
-          destDir:   destinationDir, 
-          fork:      "false",
-          classpath: configurations.compile.asPath) 
-        {
-            sourceroots {
-              sourceSets.main.java.srcDirs.each{
-                pathelement(location:it.absolutePath)
+        if (isAspectjProject) {
+          println("AspectJ " + p)
+          repositories   { mavenCentral() }
+          configurations { ajc }
+          dependencies   { ajc 'org.aspectj:aspectjtools:1.9.4' }
+          sourceSets { // this is necessary to exclude aj source files from the jar
+            main {
+              resources { 
+                exclude '**/*.aj' 
               }
             }
-            include( name:'**/*.aj' )
-            exclude( name:'**/*.java' )
+          }
+		  ant.taskdef( 
+		    resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", 
+			classpath: configurations.ajc.asPath
+		  )
+          ant.iajc(
+            source:    project.sourceCompatibility, 
+            target:    project.targetCompatibility, 
+            destDir:   destinationDir, 
+            fork:      "false",
+            classpath: configurations.compile.asPath) 
+          {
+              sourceroots {
+                sourceSets.main.java.srcDirs.each{
+                  pathelement(location:it.absolutePath)
+                }
+              }
+              include( name:'**/*.aj' )
+              exclude( name:'**/*.java' )
+          }
         }
       }
     }

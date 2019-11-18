@@ -20,8 +20,8 @@ Require-Bundle: \
 Eclipse-SupplementBundle: example.aspectj.bnd.app
 
 X-COMMENT: select only one of the following Export-Package statements by removing the trailing index number 
-Export-Package0: example.aspectj.wildcard;aspects="AfterAspectJ,AfterReturningAspectJ,AroundAspectJ,BeforeAspectJ";x-internal:=true
+Export-Package: example.aspectj.wildcard;aspects="AfterAspectJ,AfterReturningAspectJ,AroundAspectJ,BeforeAspectJ";x-internal:=true
 Export-Package1: example.aspectj.wildcard;aspects="AfterAspectJ";x-internal:=true
 Export-Package2: example.aspectj.wildcard;aspects="AfterReturningAspectJ";x-internal:=true
-Export-Package: example.aspectj.wildcard;aspects="AroundAspectJ";x-internal:=true
+Export-Package3: example.aspectj.wildcard;aspects="AroundAspectJ";x-internal:=true
 Export-Package4: example.aspectj.wildcard;aspects="BeforeAspectJ";x-internal:=true
